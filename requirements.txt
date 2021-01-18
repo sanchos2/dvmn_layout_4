@@ -1,5 +1,6 @@
 beautifulsoup4==4.9.3
 Jinja2==2.11.2
+livereload==2.6.3
 lxml==4.6.1
 mypy==0.790
 requests==2.25.0
