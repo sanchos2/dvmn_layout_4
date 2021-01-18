@@ -76,8 +76,7 @@ def download_img(url: str, path: str, folder='image') -> Optional[str]:
     abs_img_url = urljoin('https://tululu.org/', img['src'])
     raw_img = get_response(abs_img_url)
     img_name = get_hash(raw_img.content)
-    path_to_file = os.path.join(folder, f'{img_name}.jpg')
-
+    path_to_file = os.path.join(folder, f'{img_name}.jpg').replace('\\', '/')
     with open(path_to_file, 'wb') as image:
         image.write(raw_img.content)
     return path_to_file
@@ -88,7 +87,7 @@ def download_txt(url: str, path: str, folder='books') -> str:
     create_dir(path, folder)
     response = get_response(url)
     filename = get_hash(response.text.encode('utf-8'))
-    path_to_file = os.path.join(folder, f'{filename}.txt')
+    path_to_file = os.path.join(folder, f'{filename}.txt').replace('\\', '/')
     if response.headers['Content-Type'] == 'text/plain; charset="utf-8"':
         with open(path_to_file, 'w', encoding='utf8') as book:
             book.write(response.text)
