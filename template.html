@@ -14,19 +14,19 @@
       {% if page == 1 %}
         <li class="page-item disabled"><a class="page-link" href="#">Предыдущая</a></li>
       {% else %}
-        <li class="page-item"><a class="page-link" href="#">Предыдущая</a></li>
+        <li class="page-item"><a class="page-link" href="./index{{ page - 1 }}.html">Предыдущая</a></li>
       {% endif %}
       {% for page_number in range(1, pages+1) %}
-      {% if page_number == page %}
-        <li class="page-item active"><a class="page-link" href="./index{{ page_number }}.html">{{ page_number }}</a><span class="sr-only">(current)</span></li>
-      {% else %}
-        <li class="page-item"><a class="page-link" href="./index{{ page_number }}.html">{{ page_number }}</a></li>
-      {% endif %}
+        {% if page_number == page %}
+          <li class="page-item active"><a class="page-link" href="./index{{ page_number }}.html">{{ page_number }}</a><span class="sr-only">(current)</span></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="./index{{ page_number }}.html">{{ page_number }}</a></li>
+        {% endif %}
       {% endfor %}
       {% if page == pages %}
         <li class="page-item disabled"><a class="page-link" href="#">Следующая</a></li>
       {% else %}
-        <li class="page-item"><a class="page-link" href="#">Следующая</a></li>
+        <li class="page-item"><a class="page-link" href="./index{{ page + 1}}.html">Следующая</a></li>
       {% endif %}
     </ul>
   </nav>
