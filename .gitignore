@@ -139,5 +139,5 @@ image/
 pages/
 description.json
 *.log.*
-index.html
+index*.html
 books.json
