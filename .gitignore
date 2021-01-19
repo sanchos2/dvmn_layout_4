@@ -135,7 +135,6 @@ venv/
 media/
 .env
 pages/books/
-pages/image/
 
 description.json
 *.log.*
