@@ -15,21 +15,21 @@ with open('books.json', 'r', encoding='utf8') as json_file:
 books = json.loads(raw_books)
 
 os.makedirs('pages', exist_ok=True)
-pages = math.ceil(len(books) / int(os.getenv('BOOK_PER_PAGE', 10)))
+pages = math.ceil(len(books) / int(os.getenv('BOOK_PER_PAGE', 10)))  # noqa: WPS221
 
 
-def on_reload():
-    """Render template."""
+def on_reload() -> None:
+    """Рендерид html страницы."""
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml']),
     )
     template = env.get_template('template.html')
-    for page, chunk in enumerate(chunked(books, int(os.getenv('BOOK_PER_PAGE', 10))), 1):
+    for page, chunk in enumerate(chunked(books, int(os.getenv('BOOK_PER_PAGE', 10))), 1):  # noqa: WPS221
         rendered_page = template.render({'chunk': chunk, 'pages': pages, 'page': page})
-        with open(f'index{page}.html', 'w', encoding='utf8') as html_file:
+        with open(os.path.join('pages', f'index{page}.html'), 'w', encoding='utf8') as html_file:  # noqa: WPS221
             html_file.write(rendered_page)
 
 
 server.watch('template.html', on_reload)
-server.serve(default_filename='index1.html')
+server.serve(root='pages', default_filename='index1.html')
