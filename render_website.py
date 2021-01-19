@@ -32,4 +32,4 @@ def on_reload() -> None:
 
 
 server.watch('template.html', on_reload)
-server.serve(root='pages', default_filename='index1.html')
+server.serve(root='pages')
