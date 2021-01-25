@@ -4,12 +4,11 @@ import os
 from typing import List, Optional, Union
 from urllib.parse import urljoin
 
-import requests
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 
-load_dotenv()
-logger = logging.getLogger('parser.main')
+from response_handler import get_response
+
+logger = logging.getLogger('parser.books_handler')
 
 
 def get_hash(content: Union[bytes]) -> str:  # noqa: WPS110
@@ -17,23 +16,6 @@ def get_hash(content: Union[bytes]) -> str:  # noqa: WPS110
     hash_md5 = hashlib.md5()  # noqa: S303
     hash_md5.update(content)
     return hash_md5.hexdigest()
-
-
-def check_for_redirect(response: requests.models.Response):
-    """Проверяет наличие редиректа."""
-    if response.history:
-        raise requests.exceptions.HTTPError
-
-
-def get_response(url: str) -> requests.models.Response:
-    """получает ответ на запрос по url."""
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:74.0) Gecko/20100101 Firefox/74.0',
-    }
-    response = requests.get(url=url, headers=headers, verify=False)  # noqa: S501
-    response.raise_for_status()
-    check_for_redirect(response)
-    return response
 
 
 def get_book_description(soup) -> List[str]:
@@ -76,7 +58,7 @@ def download_img(url: str, path: str, folder='image') -> Optional[str]:
     abs_img_url = urljoin('https://tululu.org/', img['src'])
     raw_img = get_response(abs_img_url)
     img_name = get_hash(raw_img.content)
-    path_to_file = os.path.join(folder, f'{img_name}.jpg').replace('\\', '/')
+    path_to_file = os.path.join(folder, f'{img_name}.jpg').replace('\\', '/')  # noqa: WPS221
     with open(path_to_file, 'wb') as image:
         image.write(raw_img.content)
     return path_to_file
@@ -87,7 +69,7 @@ def download_txt(url: str, path: str, folder='books') -> str:
     create_dir(path, folder)
     response = get_response(url)
     filename = get_hash(response.text.encode('utf-8'))
-    path_to_file = os.path.join(folder, f'{filename}.txt').replace('\\', '/')
+    path_to_file = os.path.join(folder, f'{filename}.txt').replace('\\', '/')  # noqa: WPS221
     if response.headers['Content-Type'] == 'text/plain; charset="utf-8"':
         with open(path_to_file, 'w', encoding='utf8') as book:
             book.write(response.text)
