@@ -31,6 +31,7 @@ jobs:
       run: |
         flake8 parse_tululu_category.py --count --exit-zero --show-source --statistics
         flake8 render_website.py --count --exit-zero --show-source --statistics
+        flake8 response_handler.py --count --exit-zero --show-source --statistics
     - name: Type hints checking
       run: |
         mypy .
