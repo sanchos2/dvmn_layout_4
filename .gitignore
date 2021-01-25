@@ -134,7 +134,7 @@ dmypy.json
 venv/
 media/
 .env
-pages/books/
+pages/css/
 
 description.json
 *.log.*
