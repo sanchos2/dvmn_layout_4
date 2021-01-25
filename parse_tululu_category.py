@@ -12,8 +12,9 @@ from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-from main import download_img, download_txt, get_book_comments  # noqa: I001
-from main import get_book_description, get_book_genres, get_response  # noqa: I001
+from books_handler import download_img, download_txt, get_book_comments  # noqa: I001
+from books_handler import get_book_description, get_book_genres  # noqa: I001
+from response_handler import get_response
 
 load_dotenv()
 logger = logging.getLogger('parser')
