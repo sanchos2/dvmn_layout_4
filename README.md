@@ -80,6 +80,10 @@ parse_tululu_category.py --start_page 234 --end_page 237 --json_path /home/user/
 BOOK_PER_PAGE=10
 ```
 
+### Запуск бибилиотеки в оффлайн режиме
+
+Открыть в браузере файл /pages/index.html
+
 ### Цель проекта
 
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
