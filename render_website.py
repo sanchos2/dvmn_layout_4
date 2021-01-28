@@ -27,7 +27,7 @@ def remove_files(template_path: str) -> None:
 
 
 def on_reload() -> None:
-    """Рендерид html страницы."""
+    """Рендерит html страницы."""
     env = Environment(
         loader=FileSystemLoader('.'),
         autoescape=select_autoescape(['html', 'xml']),
