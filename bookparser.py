@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 
 from bs4 import BeautifulSoup
 
-from response_handler import get_response
+from bookfetcher import get_response
 
 logger = logging.getLogger('parser.books_handler')
 
