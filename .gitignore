@@ -138,3 +138,5 @@ media/
 description.json
 *.log.*
 books.json
+pages/books
+pages/image
